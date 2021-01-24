@@ -11,14 +11,14 @@ Class-based views
     2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
 Including another URLconf
     1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+    2. Add a URL to urlpatterns:  path('gms/', include('gms.urls'))
 """
 from django.contrib import admin
-from django.urls import path
-from django.contrib import admin
 from django.urls import path, include
+from django.views.generic import RedirectView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('pybo/', include('pybo.urls')),
+    path('gms/', include('gms.urls')), #gms/로 접속이 들어오는 경우, gms.urls 파일에 있는 url 매핑을 참고하여 처리한다.
+    path('', RedirectView.as_view(url='gms/', permanent=True)), #빈 경로로 접속이 들어오는 경우, /gms/로 처리한다.
 ]
